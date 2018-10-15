@@ -1,17 +1,42 @@
 {
   "name": "devcheatsheet",
   "version": "0.1.0",
+  "main": "public/main.js",
+  "homepage": "./",
   "private": true,
+  "build": {
+    "appId": "fr.test",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "electron": "^3.0.4",
+    "electron-builder": "^20.28.4",
+    "wait-on": "^3.1.0"
+  },
   "dependencies": {
+    "electron-is-dev": "^1.0.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
+    "react-markdown": "^4.0.3",
+    "react-scripts": "2.0.4",
+    "remark-shortcodes": "^0.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preelectron-pack": "yarn build",
+    "electron-start": "electron .",
+    "electron-pack": "build -c.extraMetadata.main=build/main.js",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"
